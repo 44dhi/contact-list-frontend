@@ -1,24 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy } from 'react';
+import './App.scss';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Layout from './components/Layout/Layout';
+import { CssBaseline, ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
+import { blue } from '@mui/material/colors';
+
+const Login = lazy(() => import('./views/login/Login'))
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '/f',
+        element: <div>sdsd</div>
+      }
+    ]
+  },
+  {
+    path: '/login',
+    element: <Login />
+  }
+])
 
 function App() {
+
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          primary: {
+            main: blue[700],
+          },
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+        typography: {
+          fontFamily: 'Inter'
+        },
+        components: {
+          MuiButton: {
+            styleOverrides: {
+              root: {
+                borderRadius: '10px'
+              }
+            }
+          }
+        }
+      }),
+    [prefersDarkMode],
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Suspense>
+          <RouterProvider router={router} />
+        </Suspense>
+      </ThemeProvider>
     </div>
   );
 }
