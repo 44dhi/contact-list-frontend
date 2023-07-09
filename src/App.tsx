@@ -58,7 +58,6 @@ function App() {
   const SuspenseLoader = () => {
     return <Box className="suspense-loader">
       <CircularProgress />
-      <Typography color={'primary'} fontWeight={600}>Loading...</Typography>
     </Box>
   }
 
