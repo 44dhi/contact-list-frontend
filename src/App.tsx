@@ -2,8 +2,10 @@ import React, { Suspense, lazy } from 'react';
 import './App.scss';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import { CssBaseline, ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
+import { Box, CircularProgress, CssBaseline, ThemeProvider, Typography, createTheme, useMediaQuery } from '@mui/material';
 import { blue } from '@mui/material/colors';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 const Login = lazy(() => import('./views/login/Login'))
 
@@ -53,13 +55,22 @@ function App() {
     [prefersDarkMode],
   );
 
+  const SuspenseLoader = () => {
+    return <Box className="suspense-loader">
+      <CircularProgress />
+      <Typography color={'primary'} fontWeight={600}>Loading...</Typography>
+    </Box>
+  }
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Suspense>
-          <RouterProvider router={router} />
-        </Suspense>
+        <Provider store={store}>
+          <Suspense fallback={<SuspenseLoader />}>
+            <RouterProvider router={router} />
+          </Suspense>
+        </Provider>
       </ThemeProvider>
     </div>
   );
