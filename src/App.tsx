@@ -6,8 +6,16 @@ import { Box, CircularProgress, CssBaseline, ThemeProvider, Typography, createTh
 import { blue } from '@mui/material/colors';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import ContactMain from './components/ContactMain/ContactMain';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const Login = lazy(() => import('./views/login/Login'))
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {staleTime: 10000}
+  }
+})
 
 const router = createBrowserRouter([
   {
@@ -15,8 +23,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '/f',
-        element: <div>sdsd</div>
+        path: '/:id',
+        element: <ContactMain />
       }
     ]
   },
@@ -63,14 +71,16 @@ function App() {
 
   return (
     <div className="App">
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Provider store={store}>
-          <Suspense fallback={<SuspenseLoader />}>
-            <RouterProvider router={router} />
-          </Suspense>
-        </Provider>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Provider store={store}>
+            <Suspense fallback={<SuspenseLoader />}>
+              <RouterProvider router={router} />
+            </Suspense>
+          </Provider>
+        </ThemeProvider>
+      </QueryClientProvider>
     </div>
   );
 }

@@ -9,6 +9,8 @@
     "@mui/lab": "^5.0.0-alpha.135",
     "@mui/material": "^5.13.7",
     "@reduxjs/toolkit": "^1.9.5",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^0.9.396",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",

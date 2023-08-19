@@ -19,4 +19,8 @@ instance.interceptors.request.use(function (config) {
   return config
 });
 
+export const getContactForId = (id: any) => {
+  return instance.get('/contacts' + id)
+}
+
 export default instance
