@@ -14,7 +14,7 @@ function CreateContactModal({open}: Props) {
         <IconButton className={styles['close']}>
           <Close />
         </IconButton>
-        <Typography>Create Contact</Typography>
+        <Typography variant='h4'>Create Contact</Typography>
       </Card>
     </Modal>
   )
