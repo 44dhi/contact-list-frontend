@@ -5,7 +5,6 @@ import Header from '../Header/Header'
 import instance from '../../utils/api'
 import { useAppDispatch } from '../../store/hooks'
 import { getUserForRedux } from '../../store/slices/userSlice'
-import Spline from '@splinetool/react-spline';
 import { Stack } from '@mui/material'
 import styles from './Layout.module.scss'
 import Sidebar from '../Sidebar/Sidebar'

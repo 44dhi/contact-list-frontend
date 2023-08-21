@@ -1,13 +1,14 @@
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState } from 'react'
 import styles from './Sidebar.module.scss'
-import { Avatar, Box, Button, CircularProgress, Stack, Typography, useTheme } from '@mui/material'
+import { Avatar, Box, Button, CircularProgress, Fab, Stack, Typography, useTheme } from '@mui/material'
 import { useAppSelector } from '../../store/hooks'
 import { filterContactsByAlphabet } from '../../utils/Contacts'
 import { Contacts } from '../../utils/interfaces'
 import { ButtonBase } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom'
-
+import AddIcon from '@mui/icons-material/Add';
+import CreateContactModal from '../Modals/CreateContactModal'
 
 function Sidebar() {
 
@@ -18,6 +19,7 @@ function Sidebar() {
   const navigate = useNavigate()
   const location = useLocation()
 
+  const [showCreateModal, setShowCreateModal] = useState(true)
   const [categories, setCategories] = useState([])
   const [displayArray, setDisplayArray] = useState(contacts)
 
@@ -73,6 +75,11 @@ function Sidebar() {
           </div>
         })
       }
+      <Fab color="primary" variant="extended" aria-label="add" className={styles['fab']}>
+        <AddIcon />
+        <span>&nbsp; New Contact</span>
+      </Fab>
+      <CreateContactModal open={showCreateModal} />
     </Box>
   )
 }
