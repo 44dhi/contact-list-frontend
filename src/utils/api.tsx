@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-const baseURL: string = 'http://localhost:3002'
+const baseURL: string = 'https://contact-backend-dy0t.onrender.com'
 
 const instance = axios.create(
   {
